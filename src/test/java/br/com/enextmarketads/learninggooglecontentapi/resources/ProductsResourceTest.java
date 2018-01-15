@@ -7,7 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestClientException;
 
+import br.com.enextmarketads.learninggooglecontentapi.resources.products.Product;
 import static org.assertj.core.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
@@ -21,4 +23,17 @@ public class ProductsResourceTest {
 		String body = this.restTemplate.getForObject("/products", String.class);
 		assertThat(body).isEqualTo("Got it!");
 	}
+	
+	@Test
+	public void exampleTest2() {
+		Product product = new Product();
+		product.setTitle("abc");
+		try{
+			this.restTemplate.put("/products", product);
+		}
+		catch(RestClientException e){
+			
+		}
+	}
 }
+	
